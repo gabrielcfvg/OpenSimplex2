@@ -27,6 +27,10 @@ lto = "fat"
 codegen-units = 1
 panic = "abort"
 
+[features]
+default = []
+std = []
+
 [lints]
 clippy.excessive_precision = "allow"
 clippy.identity_op = "allow"
