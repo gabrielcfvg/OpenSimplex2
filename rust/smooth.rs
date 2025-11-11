@@ -834,8 +834,6 @@ fn initStaticData() -> StaticData {
     let gradients2D: Vec<_> = GRAD2_SRC
         .iter()
         .map(|v| (v / NORMALIZER_2D) as f32)
-        .collect::<Vec<_>>() // cache divisions
-        .into_iter()
         .cycle()
         .take((N_GRADS_2D * 2) as usize)
         .collect();
@@ -843,8 +841,6 @@ fn initStaticData() -> StaticData {
     let gradients3D: Vec<_> = GRAD3_SRC
         .iter()
         .map(|v| (v / NORMALIZER_3D) as f32)
-        .collect::<Vec<_>>() // cache divisions
-        .into_iter()
         .cycle()
         .take((N_GRADS_3D * 4) as usize)
         .collect();
@@ -852,8 +848,6 @@ fn initStaticData() -> StaticData {
     let gradients4D: Vec<_> = GRAD4_SRC
         .iter()
         .map(|v| (v / NORMALIZER_4D) as f32)
-        .collect::<Vec<_>>() // cache divisions
-        .into_iter()
         .cycle()
         .take((N_GRADS_4D * 4) as usize)
         .collect();
