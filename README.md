@@ -38,18 +38,55 @@ Gradient vector tables were also revisited to improve probability symmetry in bo
 Note: area-generators have been moved to [their original repository](https://github.com/KdotJPG/Noise-VertexQueue-AreaGen).
 
 ## C FFI usage
+
+### Monual usage
 Install a [Rust toolchain](https://www.rust-lang.org/tools/install) if needed.
 
 Build debug or release artifacts with:
 ```
 cargo build
 # or
-cargo build --release
+cargo build --release --features std
 ```
 Library files will be in `./target/{debug,release}/`. Copy header from [`./rust/OpenSimplex2.h`](./rust/OpenSimplex2.h).
 
+### CMake
+
+To include the library in your own CMake project, simply add the subdirectory and link the OpenSimplex2 interface target:
+
+```cmake
+add_subdirectory(submodules/OpenSimplex2)
+target_link_libraries(${CURRENT_PROJECT} PUBLIC OpenSimplex2Interface)
+```
+
+The OpenSimplex2 interface provides two implementation backends (C and Rust).
+By default, only the Rust backend is compiled.
+To control which backend should be used, configure the following options:
+
+* OPENSIMPLEX_C — OFF by default
+* OPENSIMPLEX_RUST — ON by default
+
+You can enable both backends simultaneously if needed.
+To override the default options, use:
+
+```cmake 
+option(OPENSIMPLEX_C "Enable build old C implementation instead Rust" ON)
+option(OPENSIMPLEX_RUST "Enable build old C implementation instead Rust" ON)
+```
+
+### Including in C/C++ Projects
+
+``` cpp
+#include <c/OpenSimplex2F.h> // if the OPENSIMPLEX_C option enabled
+#include <rust/OpenSimplex2.h> // if the OPENSIMPLEX_RUST option enabled
+```
+
+**Note:**
+The C and Rust implementations use different function names to call the noise generators.
+
 ## Changelog
 
+* Rust implementation optimisations and CMake Inteface implementation (Nov 12, 2025)
 * Tuned up this `README.md`. (Mar 26, 2022)
 * Re-wrote functions to be instancelessly seedable and less dependent on lookup tables. Re-organized repository. Renamed `OpenSimplex2F` to just `OpenSimplex2` in file/class names. (Jan 16, 2022)
 * Shortened lookup table for Simplex/OpenSimplex2(F) 4D (July 5, 2020)

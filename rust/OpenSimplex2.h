@@ -1,5 +1,9 @@
-#pragma once
 #ifndef OPENSIMPLEX2_H
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 extern float opensimplex2_fast_noise2(long long seed, double x, double y);
 extern float opensimplex2_fast_noise2_ImproveX(long long seed, double x, double y);
@@ -21,5 +25,9 @@ extern float opensimplex2_smooth_noise4_ImproveXYZ_ImproveXZ(long long seed, dou
 extern float opensimplex2_smooth_noise4_ImproveXYZ(long long seed, double x, double y, double z, double w);
 extern float opensimplex2_smooth_noise4_ImproveXY_ImproveZW(long long seed, double x, double y, double z, double w);
 extern float opensimplex2_smooth_noise4_Fallback(long long seed, double x, double y, double z, double w);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
